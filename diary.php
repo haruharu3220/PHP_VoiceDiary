@@ -30,12 +30,12 @@ if (isset($_POST['diary'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>声日記</title>
+    <title>こころログ</title>
     <link href="new_style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-    <h1>声日記</h1>
+    <h1>こころログ</h1>
     
     <form action='diary.php' method="POST">
         <!-- <p type="text" name="diary" id="result-div"></p> -->
@@ -66,13 +66,13 @@ if (isset($_POST['diary'])) {
             for (let i = event.resultIndex; i < event.results.length; i++) {
                 let transcript = event.results[i][0].transcript;
                 if (event.results[i].isFinal) {
-                    finalTranscript += transcript;
+                    finalTranscript += transcript+'\n';
                 } else {
                     interimTranscript = transcript;
                 }
             }
             setMesseage(finalTranscript);
-            resultDiv.innerHTML = finalTranscript + '<i style="color:#ddd;">' + interimTranscript + '</i>';
+            resultDiv.innerHTML = finalTranscript +'<i style="color:#ddd;">' + interimTranscript + '</i>';
         
         
         }
@@ -88,14 +88,11 @@ if (isset($_POST['diary'])) {
 
             if (text.indexOf("送信")!=-1) {
                 $("#diaryInput").val($('#result-div').text());
-
-                $('button').click();
-                
+                $('button').click();   
             }
 
             if (text === ("確認" || "かくにん" || "カクニン")) {
                 $('button').click();
-                
             }
             
             return text;

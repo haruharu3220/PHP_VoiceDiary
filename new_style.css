@@ -1,4 +1,37 @@
 @charset "UTF-8";
+
+@font-face {
+  font-family: "myfont";
+  src: url("../res/しょかき楷月（無料版）2.00.ttf");
+}
+
+h1 {
+  font-family: "Noto Serif Japanese";
+  text-align: center;
+  width: 410px;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  font-size: 28px;
+  letter-spacing: 0.24em;
+  font-weight: 400;
+  color: #333333;
+  padding-left: 0.24em;
+  margin-left: 1em;
+  margin-right: 1em;
+
+}
+
+h1:before,
+h1:after {
+  content: "";
+  display: block;
+  flex: auto;
+  height: 5px;
+  border-radius: 0px;
+  background: #333333;
+}
+
 #result-div {
   border: rgba(0, 0, 0, 0);
   background-color: rgba(0, 0, 0, 0);
@@ -11,30 +44,32 @@
 }
 
 button {
-  color: white;
+  color:  rgba(0, 0, 0, 0);
   background-color: rgba(255, 255, 255, 0.1);
   border: rgb(158, 214, 249);
 }
-button :hovera {
-  background-color: red;
-}
+
 
 body {
   width: 100%;
   height: 100vh;
-  background: linear-gradient(45deg, #3bade3, #9844b7, #44ea76); /*グラデーションを定義*/
-  background-size: 200% 200%; /*サイズを大きくひきのばす*/
+  background: linear-gradient(45deg, #fff1eb, #ced9ff, #ace0f9);
+  /*グラデーションを定義*/
+  background-size: 200% 200%;
+  /*サイズを大きくひきのばす*/
   -webkit-animation: bggradient 20s ease infinite;
-          animation: bggradient 20s ease infinite;
+  animation: bggradient 20s ease infinite;
 }
 
 @-webkit-keyframes bggradient {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -44,10 +79,14 @@ body {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
-}/*# sourceMappingURL=new_style.css.map */
+}
+
+/*# sourceMappingURL=new_style.css.map */

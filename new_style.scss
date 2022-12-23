@@ -3,7 +3,17 @@ $lostcolor: rgb(158, 214, 249);
 $foundcolor: rgb(120, 207, 110);
 $transparent: rgba(0,0,0,0);
 
+@font-face {
+    font-family: 'myfont';
+    // font-style: normal;
+    src: url('../res/ShigotoMemogaki-Regular-1-01.ttf') ;
+}
 
+
+h1{
+    font-family: myfont;
+    text-align: center;
+}
 
 #result-div{
 border: $transparent;
@@ -30,7 +40,7 @@ button{
 body {
     width: 100%;
     height: 100vh;
-    background:linear-gradient(45deg, #3bade3,#9844b7,#44ea76);/*グラデーションを定義*/
+    background:linear-gradient(45deg, #fff1eb,#ced9ff,#ace0f9);/*グラデーションを定義*/
     background-size: 200% 200%;/*サイズを大きくひきのばす*/
     animation: bggradient 20s ease infinite;
   }
