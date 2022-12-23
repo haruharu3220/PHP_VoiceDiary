@@ -1,25 +1,26 @@
 <?php
-//データまとめ用の空文字変数
-$_POST['diary'];
 
-// データ1件を1行にまとめる（最後に改行を入れる）
-$write_data = "日記「{$_POST['diary']}」。 \n";
+if (isset($_POST['diary'])) {
+    $_POST['diary'];
+    //ファイルを開く
+    $objDateTime = new DateTime();
+    $word =str_replace("送信","",$_POST['diary']);
+    $write_data = "{$objDateTime->format('H:i:s')} :{$word} \n";
 
-//ファイルを開く
-// $file = fopen('data/questions.txt', 'a');
-$pass = "data/" . date("Y-m-d_H時i分");
-$file = fopen($pass, 'a');
-//ファイルをロック
-flock($file, LOCK_EX);
+    $pass = "data/" . $objDateTime->format('Y-m-d').".txt";
+    $file = fopen($pass, 'a');
+    //ファイルをロック
+    flock($file, LOCK_EX);
 
-// 指定したファイルに指定したデータを書き込む
-fwrite($file, $write_data);
+    // 指定したファイルに指定したデータを書き込む
+    fwrite($file, $write_data);
 
 
-//ロックを解除する
-flock($file, LOCK_UN);
-//ファイルを閉じる
-fclose($file);
+    //ロックを解除する
+    flock($file, LOCK_UN);
+    //ファイルを閉じる
+    fclose($file);
+}
 ?> 
 
 
@@ -30,15 +31,16 @@ fclose($file);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>声日記</title>
+    <link href="new_style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
     <h1>声日記</h1>
     
-
     <form action='diary.php' method="POST">
         <!-- <p type="text" name="diary" id="result-div"></p> -->
-        <input name="diary" id="result-div"></input>
+        <dev  id="result-div"></dev>
+        <input name="diary" id="diaryInput"></input>
         <div>
             <button>submit</button>
         </div>
@@ -69,15 +71,11 @@ fclose($file);
                     interimTranscript = transcript;
                 }
             }
+            setMesseage(finalTranscript);
             resultDiv.innerHTML = finalTranscript + '<i style="color:#ddd;">' + interimTranscript + '</i>';
+        
+        
         }
-
-        speech.addEventListener('result', function (e) {
-            var text = e.results[0][0].transcript;
-            // 「ビデオ」と認識されたら指定の関数を実行
-            console.log("text=" + text);
-            setMesseage(text);
-        });
 
         //https://www.codegrid.net/articles/2016-web-speech-api-1/
         //SpeechAPIが止まったら
@@ -88,10 +86,18 @@ fclose($file);
 
         function setMesseage(text) {
 
-            if (text === ("送信" || "そうしん" || "ソウシン")) {
+            if (text.indexOf("送信")!=-1) {
+                $("#diaryInput").val($('#result-div').text());
+
                 $('button').click();
                 
             }
+
+            if (text === ("確認" || "かくにん" || "カクニン")) {
+                $('button').click();
+                
+            }
+            
             return text;
         }
     </script>
